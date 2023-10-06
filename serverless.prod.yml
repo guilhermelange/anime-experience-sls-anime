@@ -1,5 +1,4 @@
-service: anex-anime,
-
+service: anex-anime
 
 plugins:
   - serverless-plugin-optimize
