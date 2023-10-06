@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="C:\Users\guilu\OneDrive\Área de Trabalho\anex-project\anex-anime\src\models\anime\anime.service.spec.ts">
+    <testCase name="AnimeService should be defined" duration="287"/>
+  </file>
+  <file path="C:\Users\guilu\OneDrive\Área de Trabalho\anex-project\anex-anime\src\models\anime\anime.controller.spec.ts">
+    <testCase name="AnimeController should be defined" duration="107"/>
+  </file>
+</testExecutions>

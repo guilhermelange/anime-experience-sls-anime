@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { UpdateAnimeDto } from './dto/update-anime.dto';
-import { PrismaService } from 'src/common/database';
+import { PrismaService } from '../../common/database';
 
 @Injectable()
 export class AnimeService {

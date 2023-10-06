@@ -74,7 +74,7 @@
     "MainLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/anex-anime-main"
+        "LogGroupName": "/aws/lambda/prod-anex-anime-main"
       }
     },
     "IamRoleLambdaExecution": {
@@ -103,7 +103,7 @@
                 "-",
                 [
                   "anex-anime",
-                  "dev",
+                  "prod",
                   "lambda"
                 ]
               ]
@@ -120,7 +120,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/anex-anime-main:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/prod-anex-anime-main:*"
                     }
                   ]
                 },
@@ -131,7 +131,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/anex-anime-main:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/prod-anex-anime-main:*:*"
                     }
                   ]
                 }
@@ -145,7 +145,7 @@
             "-",
             [
               "anex-anime",
-              "dev",
+              "prod",
               {
                 "Ref": "AWS::Region"
               },
@@ -162,11 +162,11 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/anex-anime/dev/1696540820763-2023-10-05T21:20:20.763Z/main.zip"
+          "S3Key": "serverless/anex-anime/prod/1696611060250-2023-10-06T16:51:00.250Z/main.zip"
         },
-        "Handler": "_optimize/anex-anime-main/dist/main.handler",
+        "Handler": "_optimize/prod-anex-anime-main/dist/main.handler",
         "Runtime": "nodejs14.x",
-        "FunctionName": "anex-anime-main",
+        "FunctionName": "prod-anex-anime-main",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
@@ -185,22 +185,22 @@
         "MainLogGroup"
       ]
     },
-    "MainLambdaVersion25nhQXVpYzChdMOZCODs3K4uhjAJXWJHFW2I0zBzw": {
+    "MainLambdaVersionbqHxMtShGnZWPYAV0E8v09BLmNScJxZgGCVh8FR2dro": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "MainLambdaFunction"
         },
-        "CodeSha256": "31z6fcUY+nw5nRtgT32A+JZSkPwW7MyQtBRFLUWiP6c="
+        "CodeSha256": "J4BzyieX+PhSCS3rR0s1uCUHP5GRJqHEFJ7JoucDBeA="
       }
     },
     "ApiGatewayResourceAnimes": {
       "Type": "AWS::ApiGateway::Resource",
       "Properties": {
-        "ParentId": "1skt6n60u2",
+        "ParentId": "ch0rgoes3f",
         "PathPart": "animes",
-        "RestApiId": "uupn0m2nb4"
+        "RestApiId": "gxovi0wer4"
       }
     },
     "ApiGatewayResourceAnimesProxyVar": {
@@ -210,7 +210,7 @@
           "Ref": "ApiGatewayResourceAnimes"
         },
         "PathPart": "{proxy+}",
-        "RestApiId": "uupn0m2nb4"
+        "RestApiId": "gxovi0wer4"
       }
     },
     "ApiGatewayMethodAnimesOptions": {
@@ -253,7 +253,7 @@
         "ResourceId": {
           "Ref": "ApiGatewayResourceAnimes"
         },
-        "RestApiId": "uupn0m2nb4"
+        "RestApiId": "gxovi0wer4"
       }
     },
     "ApiGatewayMethodAnimesProxyVarOptions": {
@@ -296,7 +296,7 @@
         "ResourceId": {
           "Ref": "ApiGatewayResourceAnimesProxyVar"
         },
-        "RestApiId": "uupn0m2nb4"
+        "RestApiId": "gxovi0wer4"
       }
     },
     "ApiGatewayMethodAnimesAny": {
@@ -307,7 +307,7 @@
         "ResourceId": {
           "Ref": "ApiGatewayResourceAnimes"
         },
-        "RestApiId": "uupn0m2nb4",
+        "RestApiId": "gxovi0wer4",
         "ApiKeyRequired": false,
         "AuthorizationType": "NONE",
         "Integration": {
@@ -351,7 +351,7 @@
         "ResourceId": {
           "Ref": "ApiGatewayResourceAnimesProxyVar"
         },
-        "RestApiId": "uupn0m2nb4",
+        "RestApiId": "gxovi0wer4",
         "ApiKeyRequired": false,
         "AuthorizationType": "NONE",
         "Integration": {
@@ -387,11 +387,11 @@
         "MainLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1696540792056": {
+    "ApiGatewayDeployment1696611030515": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
-        "RestApiId": "uupn0m2nb4",
-        "StageName": "dev"
+        "RestApiId": "gxovi0wer4",
+        "StageName": "prod"
       },
       "DependsOn": [
         "ApiGatewayMethodAnimesOptions",
@@ -428,7 +428,7 @@
                 "Ref": "AWS::AccountId"
               },
               ":",
-              "uupn0m2nb4",
+              "gxovi0wer4",
               "/*/*"
             ]
           ]
@@ -442,16 +442,16 @@
         "Ref": "ServerlessDeploymentBucket"
       },
       "Export": {
-        "Name": "sls-anex-anime-dev-ServerlessDeploymentBucketName"
+        "Name": "sls-anex-anime-prod-ServerlessDeploymentBucketName"
       }
     },
     "MainLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "MainLambdaVersion25nhQXVpYzChdMOZCODs3K4uhjAJXWJHFW2I0zBzw"
+        "Ref": "MainLambdaVersionbqHxMtShGnZWPYAV0E8v09BLmNScJxZgGCVh8FR2dro"
       },
       "Export": {
-        "Name": "sls-anex-anime-dev-MainLambdaFunctionQualifiedArn"
+        "Name": "sls-anex-anime-prod-MainLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {
@@ -461,7 +461,7 @@
           "",
           [
             "https://",
-            "uupn0m2nb4",
+            "gxovi0wer4",
             ".execute-api.",
             {
               "Ref": "AWS::Region"
@@ -470,12 +470,12 @@
             {
               "Ref": "AWS::URLSuffix"
             },
-            "/dev"
+            "/prod"
           ]
         ]
       },
       "Export": {
-        "Name": "sls-anex-anime-dev-ServiceEndpoint"
+        "Name": "sls-anex-anime-prod-ServiceEndpoint"
       }
     }
   }
