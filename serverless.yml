@@ -1,0 +1,41 @@
+service: anex-anime
+
+plugins:
+  - serverless-plugin-optimize
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  apiGateway:
+    restApiId: uupn0m2nb4 # aws apigateway get-rest-apis
+    restApiRootResourceId: 1skt6n60u2 # aws apigateway get-resources --rest-api-id uupn0m2nb4
+
+package:
+  individually: true
+  patterns:
+    - 'schema.prisma'
+    - 'node_modules/.prisma/client/schema.prisma'
+    - '!node_modules/.prisma/client/libquery_engine-*'
+    - 'node_modules/.prisma/client/libquery_engine-rhel-*'
+    - '!node_modules/prisma/libquery_engine-*'
+    - '!node_modules/@prisma/engines/**'
+
+custom:
+  optimize:
+    includePaths: ['dist/schema.prisma']
+
+functions:
+  main:
+    name: 'anex-anime-main'
+    handler: dist/main.handler
+    events:
+      - http:
+          method: ANY
+          path: /animes
+          cors: true
+      - http:
+          method: ANY
+          path: '/animes/{proxy+}'
+          cors: true
