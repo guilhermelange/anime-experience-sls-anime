@@ -74,7 +74,7 @@
     "MainLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/prod-anex-anime-main"
+        "LogGroupName": "/aws/lambda/anex-anime-main"
       }
     },
     "IamRoleLambdaExecution": {
@@ -103,7 +103,7 @@
                 "-",
                 [
                   "anex-anime",
-                  "prod",
+                  "dev",
                   "lambda"
                 ]
               ]
@@ -120,7 +120,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/prod-anex-anime-main:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/anex-anime-main:*"
                     }
                   ]
                 },
@@ -131,7 +131,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/prod-anex-anime-main:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/anex-anime-main:*:*"
                     }
                   ]
                 }
@@ -145,7 +145,7 @@
             "-",
             [
               "anex-anime",
-              "prod",
+              "dev",
               {
                 "Ref": "AWS::Region"
               },
@@ -162,16 +162,16 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/anex-anime/prod/1696611060250-2023-10-06T16:51:00.250Z/main.zip"
+          "S3Key": "serverless/anex-anime/dev/1699827108681-2023-11-12T22:11:48.681Z/main.zip"
         },
-        "Handler": "_optimize/prod-anex-anime-main/dist/main.handler",
+        "Handler": "_optimize/anex-anime-main/dist/main.handler",
         "Runtime": "nodejs14.x",
-        "FunctionName": "prod-anex-anime-main",
+        "FunctionName": "anex-anime-main",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "DATABASE_URL": "postgresql://doadmin:AVNS_HLrW0ufM-oE10mMa2Xz@db-postgresql-nyc3-38883-do-user-14745123-0.b.db.ondigitalocean.com:25060/anex?sslmode=require"
+            "DATABASE_URL": "postgresql://doadmin:AVNS_akwrMlD8tUOUQW5DG4E@anex-db-do-user-15099907-0.c.db.ondigitalocean.com:25060/anex?sslmode=require"
           }
         },
         "Role": {
@@ -185,22 +185,22 @@
         "MainLogGroup"
       ]
     },
-    "MainLambdaVersionbqHxMtShGnZWPYAV0E8v09BLmNScJxZgGCVh8FR2dro": {
+    "MainLambdaVersionDbWDQjYVfNVFEXwhQq4BhkUXJXhUHbsmaF1fj3WvD0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "MainLambdaFunction"
         },
-        "CodeSha256": "J4BzyieX+PhSCS3rR0s1uCUHP5GRJqHEFJ7JoucDBeA="
+        "CodeSha256": "LLxVGcTIFrOi5uRYfFe09cAMrbxkK3Zu9p1q7qhpkWg="
       }
     },
     "ApiGatewayResourceAnimes": {
       "Type": "AWS::ApiGateway::Resource",
       "Properties": {
-        "ParentId": "ch0rgoes3f",
+        "ParentId": "1skt6n60u2",
         "PathPart": "animes",
-        "RestApiId": "gxovi0wer4"
+        "RestApiId": "uupn0m2nb4"
       }
     },
     "ApiGatewayResourceAnimesProxyVar": {
@@ -210,7 +210,7 @@
           "Ref": "ApiGatewayResourceAnimes"
         },
         "PathPart": "{proxy+}",
-        "RestApiId": "gxovi0wer4"
+        "RestApiId": "uupn0m2nb4"
       }
     },
     "ApiGatewayMethodAnimesOptions": {
@@ -253,7 +253,7 @@
         "ResourceId": {
           "Ref": "ApiGatewayResourceAnimes"
         },
-        "RestApiId": "gxovi0wer4"
+        "RestApiId": "uupn0m2nb4"
       }
     },
     "ApiGatewayMethodAnimesProxyVarOptions": {
@@ -296,7 +296,7 @@
         "ResourceId": {
           "Ref": "ApiGatewayResourceAnimesProxyVar"
         },
-        "RestApiId": "gxovi0wer4"
+        "RestApiId": "uupn0m2nb4"
       }
     },
     "ApiGatewayMethodAnimesAny": {
@@ -307,7 +307,7 @@
         "ResourceId": {
           "Ref": "ApiGatewayResourceAnimes"
         },
-        "RestApiId": "gxovi0wer4",
+        "RestApiId": "uupn0m2nb4",
         "ApiKeyRequired": false,
         "AuthorizationType": "NONE",
         "Integration": {
@@ -351,7 +351,7 @@
         "ResourceId": {
           "Ref": "ApiGatewayResourceAnimesProxyVar"
         },
-        "RestApiId": "gxovi0wer4",
+        "RestApiId": "uupn0m2nb4",
         "ApiKeyRequired": false,
         "AuthorizationType": "NONE",
         "Integration": {
@@ -387,11 +387,11 @@
         "MainLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1696611030515": {
+    "ApiGatewayDeployment1699827075060": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
-        "RestApiId": "gxovi0wer4",
-        "StageName": "prod"
+        "RestApiId": "uupn0m2nb4",
+        "StageName": "dev"
       },
       "DependsOn": [
         "ApiGatewayMethodAnimesOptions",
@@ -428,7 +428,7 @@
                 "Ref": "AWS::AccountId"
               },
               ":",
-              "gxovi0wer4",
+              "uupn0m2nb4",
               "/*/*"
             ]
           ]
@@ -442,16 +442,16 @@
         "Ref": "ServerlessDeploymentBucket"
       },
       "Export": {
-        "Name": "sls-anex-anime-prod-ServerlessDeploymentBucketName"
+        "Name": "sls-anex-anime-dev-ServerlessDeploymentBucketName"
       }
     },
     "MainLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "MainLambdaVersionbqHxMtShGnZWPYAV0E8v09BLmNScJxZgGCVh8FR2dro"
+        "Ref": "MainLambdaVersionDbWDQjYVfNVFEXwhQq4BhkUXJXhUHbsmaF1fj3WvD0"
       },
       "Export": {
-        "Name": "sls-anex-anime-prod-MainLambdaFunctionQualifiedArn"
+        "Name": "sls-anex-anime-dev-MainLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {
@@ -461,7 +461,7 @@
           "",
           [
             "https://",
-            "gxovi0wer4",
+            "uupn0m2nb4",
             ".execute-api.",
             {
               "Ref": "AWS::Region"
@@ -470,12 +470,12 @@
             {
               "Ref": "AWS::URLSuffix"
             },
-            "/prod"
+            "/dev"
           ]
         ]
       },
       "Export": {
-        "Name": "sls-anex-anime-prod-ServiceEndpoint"
+        "Name": "sls-anex-anime-dev-ServiceEndpoint"
       }
     }
   }
