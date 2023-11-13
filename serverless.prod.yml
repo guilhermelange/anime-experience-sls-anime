@@ -9,6 +9,9 @@ provider:
   name: aws
   runtime: nodejs14.x
   stage: prod
+  tracing:
+    # apiGateway: true
+    lambda: true
   apiGateway:
     restApiId: gxovi0wer4 # aws apigateway get-rest-apis
     restApiRootResourceId: ch0rgoes3f # aws apigateway get-resources --rest-api-id hhu9wj79nj

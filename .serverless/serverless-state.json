@@ -7,11 +7,14 @@
     "provider": {
       "name": "aws",
       "runtime": "nodejs14.x",
-      "apiGateway": {
-        "restApiId": "uupn0m2nb4",
-        "restApiRootResourceId": "1skt6n60u2"
+      "stage": "prod",
+      "tracing": {
+        "lambda": true
       },
-      "stage": "dev",
+      "apiGateway": {
+        "restApiId": "gxovi0wer4",
+        "restApiRootResourceId": "ch0rgoes3f"
+      },
       "region": "us-east-1",
       "versionFunctions": true,
       "environment": {
@@ -93,7 +96,7 @@
           "MainLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/anex-anime-main"
+              "LogGroupName": "/aws/lambda/prod-anex-anime-main"
             }
           },
           "IamRoleLambdaExecution": {
@@ -122,7 +125,7 @@
                       "-",
                       [
                         "anex-anime",
-                        "dev",
+                        "prod",
                         "lambda"
                       ]
                     ]
@@ -139,7 +142,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/anex-anime-main:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/prod-anex-anime-main:*"
                           }
                         ]
                       },
@@ -150,8 +153,18 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/anex-anime-main:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/prod-anex-anime-main:*:*"
                           }
+                        ]
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "xray:PutTraceSegments",
+                          "xray:PutTelemetryRecords"
+                        ],
+                        "Resource": [
+                          "*"
                         ]
                       }
                     ]
@@ -164,7 +177,7 @@
                   "-",
                   [
                     "anex-anime",
-                    "dev",
+                    "prod",
                     {
                       "Ref": "AWS::Region"
                     },
@@ -181,13 +194,16 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/anex-anime/dev/1699827108681-2023-11-12T22:11:48.681Z/main.zip"
+                "S3Key": "serverless/anex-anime/prod/1699836065924-2023-11-13T00:41:05.924Z/main.zip"
               },
-              "Handler": "_optimize/anex-anime-main/dist/main.handler",
+              "Handler": "_optimize/prod-anex-anime-main/dist/main.handler",
               "Runtime": "nodejs14.x",
-              "FunctionName": "anex-anime-main",
+              "FunctionName": "prod-anex-anime-main",
               "MemorySize": 1024,
               "Timeout": 6,
+              "TracingConfig": {
+                "Mode": "Active"
+              },
               "Environment": {
                 "Variables": {
                   "DATABASE_URL": "postgresql://doadmin:AVNS_akwrMlD8tUOUQW5DG4E@anex-db-do-user-15099907-0.c.db.ondigitalocean.com:25060/anex?sslmode=require"
@@ -204,22 +220,22 @@
               "MainLogGroup"
             ]
           },
-          "MainLambdaVersionDbWDQjYVfNVFEXwhQq4BhkUXJXhUHbsmaF1fj3WvD0": {
+          "MainLambdaVersionJoiIW1qFNZb1vSDHlulMveirK1W7Qor8HukWfzVuhMU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "MainLambdaFunction"
               },
-              "CodeSha256": "LLxVGcTIFrOi5uRYfFe09cAMrbxkK3Zu9p1q7qhpkWg="
+              "CodeSha256": "QrrQxZkKbr1YUmPmTlMj74EmykGJl4MkEw7ylJGpJMk="
             }
           },
           "ApiGatewayResourceAnimes": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
-              "ParentId": "1skt6n60u2",
+              "ParentId": "ch0rgoes3f",
               "PathPart": "animes",
-              "RestApiId": "uupn0m2nb4"
+              "RestApiId": "gxovi0wer4"
             }
           },
           "ApiGatewayResourceAnimesProxyVar": {
@@ -229,7 +245,7 @@
                 "Ref": "ApiGatewayResourceAnimes"
               },
               "PathPart": "{proxy+}",
-              "RestApiId": "uupn0m2nb4"
+              "RestApiId": "gxovi0wer4"
             }
           },
           "ApiGatewayMethodAnimesOptions": {
@@ -272,7 +288,7 @@
               "ResourceId": {
                 "Ref": "ApiGatewayResourceAnimes"
               },
-              "RestApiId": "uupn0m2nb4"
+              "RestApiId": "gxovi0wer4"
             }
           },
           "ApiGatewayMethodAnimesProxyVarOptions": {
@@ -315,7 +331,7 @@
               "ResourceId": {
                 "Ref": "ApiGatewayResourceAnimesProxyVar"
               },
-              "RestApiId": "uupn0m2nb4"
+              "RestApiId": "gxovi0wer4"
             }
           },
           "ApiGatewayMethodAnimesAny": {
@@ -326,7 +342,7 @@
               "ResourceId": {
                 "Ref": "ApiGatewayResourceAnimes"
               },
-              "RestApiId": "uupn0m2nb4",
+              "RestApiId": "gxovi0wer4",
               "ApiKeyRequired": false,
               "AuthorizationType": "NONE",
               "Integration": {
@@ -370,7 +386,7 @@
               "ResourceId": {
                 "Ref": "ApiGatewayResourceAnimesProxyVar"
               },
-              "RestApiId": "uupn0m2nb4",
+              "RestApiId": "gxovi0wer4",
               "ApiKeyRequired": false,
               "AuthorizationType": "NONE",
               "Integration": {
@@ -406,11 +422,11 @@
               "MainLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1699827075060": {
+          "ApiGatewayDeployment1699836045003": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
-              "RestApiId": "uupn0m2nb4",
-              "StageName": "dev"
+              "RestApiId": "gxovi0wer4",
+              "StageName": "prod"
             },
             "DependsOn": [
               "ApiGatewayMethodAnimesOptions",
@@ -447,7 +463,7 @@
                       "Ref": "AWS::AccountId"
                     },
                     ":",
-                    "uupn0m2nb4",
+                    "gxovi0wer4",
                     "/*/*"
                   ]
                 ]
@@ -461,16 +477,16 @@
               "Ref": "ServerlessDeploymentBucket"
             },
             "Export": {
-              "Name": "sls-anex-anime-dev-ServerlessDeploymentBucketName"
+              "Name": "sls-anex-anime-prod-ServerlessDeploymentBucketName"
             }
           },
           "MainLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "MainLambdaVersionDbWDQjYVfNVFEXwhQq4BhkUXJXhUHbsmaF1fj3WvD0"
+              "Ref": "MainLambdaVersionJoiIW1qFNZb1vSDHlulMveirK1W7Qor8HukWfzVuhMU"
             },
             "Export": {
-              "Name": "sls-anex-anime-dev-MainLambdaFunctionQualifiedArn"
+              "Name": "sls-anex-anime-prod-MainLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -480,7 +496,7 @@
                 "",
                 [
                   "https://",
-                  "uupn0m2nb4",
+                  "gxovi0wer4",
                   ".execute-api.",
                   {
                     "Ref": "AWS::Region"
@@ -489,12 +505,12 @@
                   {
                     "Ref": "AWS::URLSuffix"
                   },
-                  "/dev"
+                  "/prod"
                 ]
               ]
             },
             "Export": {
-              "Name": "sls-anex-anime-dev-ServiceEndpoint"
+              "Name": "sls-anex-anime-prod-ServiceEndpoint"
             }
           }
         }
@@ -583,13 +599,6 @@
       },
       "vpc": {}
     },
-    "custom": {
-      "optimize": {
-        "includePaths": [
-          "dist/schema.prisma"
-        ]
-      }
-    },
     "plugins": [
       "serverless-plugin-optimize",
       "serverless-offline",
@@ -598,8 +607,8 @@
     "pluginsData": {},
     "functions": {
       "main": {
-        "name": "anex-anime-main",
-        "handler": "_optimize/anex-anime-main/dist/main.handler",
+        "name": "prod-anex-anime-main",
+        "handler": "_optimize/prod-anex-anime-main/dist/main.handler",
         "events": [
           {
             "http": {
@@ -655,7 +664,7 @@
             "**"
           ],
           "include": [
-            "_optimize/anex-anime-main/**"
+            "_optimize/prod-anex-anime-main/**"
           ],
           "artifact": "C:\\Users\\guilu\\OneDrive\\Área de Trabalho\\anex-project\\anex-anime\\.serverless\\main.zip"
         },
@@ -663,11 +672,11 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "MainLambdaVersionDbWDQjYVfNVFEXwhQq4BhkUXJXhUHbsmaF1fj3WvD0"
+        "versionLogicalId": "MainLambdaVersionJoiIW1qFNZb1vSDHlulMveirK1W7Qor8HukWfzVuhMU"
       }
     },
     "configValidationMode": "warn",
-    "serviceFilename": "serverless.yml",
+    "serviceFilename": "serverless.prod.yml",
     "initialServerlessConfig": {
       "service": "anex-anime",
       "plugins": {
@@ -686,11 +695,8 @@
           "!node_modules/prisma/libquery_engine-*",
           "!node_modules/@prisma/engines/**"
         ],
-        "artifactsS3KeyDirname": "serverless/anex-anime/dev/code-artifacts",
-        "artifactDirectoryName": "serverless/anex-anime/dev/1699827108681-2023-11-12T22:11:48.681Z"
-      },
-      "custom": {
-        "$ref": "$[\"service\"][\"custom\"]"
+        "artifactsS3KeyDirname": "serverless/anex-anime/prod/code-artifacts",
+        "artifactDirectoryName": "serverless/anex-anime/prod/1699836065924-2023-11-13T00:41:05.924Z"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -701,7 +707,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/anex-anime/dev/1699827108681-2023-11-12T22:11:48.681Z",
+    "artifactDirectoryName": "serverless/anex-anime/prod/1699836065924-2023-11-13T00:41:05.924Z",
     "artifact": ""
   }
 }
