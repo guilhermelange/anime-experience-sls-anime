@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="C:\Users\guilu\OneDrive\Área de Trabalho\anex-project\anex-anime\src\models\anime\anime.service.spec.ts">
-    <testCase name="AnimeService should be defined" duration="287"/>
+    <testCase name="AnimeService should be defined" duration="26"/>
+    <testCase name="AnimeService findAll should return a list of animes" duration="6"/>
+    <testCase name="AnimeService findAll should apply format" duration="5"/>
+    <testCase name="AnimeService findAll should return a error" duration="13"/>
+    <testCase name="AnimeService findOne should return one anime" duration="6"/>
+    <testCase name="AnimeService findOne should return a error" duration="5"/>
+    <testCase name="AnimeService findOneSeasons should return one anime seasons" duration="5"/>
+    <testCase name="AnimeService updateOne should update an anime evaluation and favorite" duration="5"/>
+    <testCase name="AnimeService updateOne should update an anime evaluation and favorite" duration="5"/>
   </file>
   <file path="C:\Users\guilu\OneDrive\Área de Trabalho\anex-project\anex-anime\src\models\anime\anime.controller.spec.ts">
-    <testCase name="AnimeController should be defined" duration="107"/>
+    <testCase name="AnimeController should be defined" duration="25"/>
+    <testCase name="AnimeController findAll should return an array of animes" duration="8"/>
+    <testCase name="AnimeController findOne should return an anime" duration="5"/>
+    <testCase name="AnimeController findOneSeasons should return an anime seasons and episodes" duration="5"/>
+    <testCase name="AnimeController updateAnime should update an anime" duration="5"/>
   </file>
 </testExecutions>

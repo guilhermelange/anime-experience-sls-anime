@@ -94,7 +94,13 @@
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "/node_modules/",
-      "/test/"
+      "/test/",
+      ".*\\.module\\.ts",
+      "/main.ts",
+      ".*\\.dto\\.ts",
+      "/src/common/auth",
+      "/src/common/database",
+      "/src/common/patch.ts"
     ]
   },
   "prisma": {
