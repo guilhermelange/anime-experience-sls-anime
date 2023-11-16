@@ -23,7 +23,8 @@
     "prisma:generate": "npx prisma generate",
     "sls:dev": "npm run build && npx sls offline",
     "sls:deploy": "npm run build && sls deploy",
-    "start:doc": "SET NODE_ENV=development && npm run start:dev"
+    "start:doc": "SET NODE_ENV=development && npm run start:dev",
+    "sonar": "node sonar-config.js"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
