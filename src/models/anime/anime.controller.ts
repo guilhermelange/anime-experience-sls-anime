@@ -18,7 +18,7 @@ import {
 } from '@nestjs/swagger';
 import { AnimeDto, AnimeGetDto, SeasonGetDto } from './dto/create-anime.dto';
 @Controller('/')
-@ApiTags('Animes')
+@ApiTags('Animes - /animes')
 @ApiSecurity('bearer')
 export class AnimeController {
   constructor(private readonly animeService: AnimeService) {}

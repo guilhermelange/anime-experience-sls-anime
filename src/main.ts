@@ -13,17 +13,13 @@ async function bootstrap(): Promise<Handler> {
   app.enableCors();
 
   if (isHml) {
-    app.setGlobalPrefix('animes/');
-
     const config = new DocumentBuilder()
       .addBearerAuth()
       .setTitle('Anex - Animes')
       .setDescription(
         'Documentação dos serviços relacionados a API de Animes do Anime Experience',
       )
-      .addServer(process.env.DOCS_HOST, 'DEV')
       .setVersion('1.0')
-      .setBasePath('animes/')
       .build();
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('api', app, document);
