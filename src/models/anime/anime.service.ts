@@ -24,7 +24,7 @@ export class AnimeService {
     });
 
     if (animes?.length <= 0) {
-      throw new NotFoundException('Animes not found');
+      throw new NotFoundException('Animes not found!');
     }
 
     const response = [];
@@ -75,7 +75,7 @@ export class AnimeService {
     });
 
     if (!anime) {
-      throw new NotFoundException('Anime not found');
+      throw new NotFoundException('Anime not found!');
     }
 
     const response = this.loadAnimeResponse(userId, anime);
@@ -122,7 +122,7 @@ export class AnimeService {
       },
     });
 
-    if (!anime) throw new NotFoundException('Anime not found');
+    if (!anime) throw new NotFoundException('Anime not found!');
 
     const user = await this.prisma.user.findUnique({
       where: {
